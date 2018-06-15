@@ -12,7 +12,7 @@ function createTable() {
   buildTable(table, gameState.rows, gameState.columns)
 
   $('.tableSetup').hide()
-  $('.gameButton').show()
+  $('.gameOption').show()
 }
 
 function buildTable(table, rows, columns) {
@@ -26,7 +26,13 @@ function buildTable(table, rows, columns) {
       cell.attr('id', id)
 
       cell.click(function() {
-        $('#' + id).addClass('selected')
+        const selfReference =  $('#' + id)
+
+        if (selfReference.hasClass('selected')) {
+          selfReference.removeClass('selected')
+        } else {
+          selfReference.addClass('selected')
+        }
       })
 
       row.append(cell)
@@ -161,4 +167,16 @@ function findColumn(columnIndex) {
 
 function pauseGame() {
   gameState.running = false
+}
+
+function randomizeBoard() {
+  for (let i = 1; i <= gameState.rows; i++) {
+    for (let j = 1; j <= gameState.columns; j++) {
+      const randomNumber = Math.floor(Math.random() * Math.floor(2)) // Either 1 or 0
+
+      if (randomNumber === 1) {
+        $('#' + i + j).addClass('selected')
+      }
+    }
+  }
 }

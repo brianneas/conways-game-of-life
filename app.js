@@ -1,6 +1,7 @@
 const gameState = {
   rows : null,
   columns : null,
+  running : false
 }
 
 function createTable() {
@@ -9,7 +10,8 @@ function createTable() {
   gameState.columns = parseInt($('#columns').val())
 
   buildTable(table, gameState.rows, gameState.columns)
-  createStartButton()
+
+  $('.gameButton').show()
 }
 
 function buildTable(table, rows, columns) {
@@ -33,18 +35,19 @@ function buildTable(table, rows, columns) {
   }
 }
 
-function createStartButton() {
-  const startButton = $('<button>Start Conway\'s Game of Life</button>')
-
-  startButton.attr({
-    class : 'startButton',
-    onclick : 'runGame()'
-  })
-
-  $('body').append(startButton)
+function runGame() {
+  gameState.running = true
+  gameOn()
 }
 
-function runGame() {
+function gameOn() {
+  if (gameState.running) {
+    game()
+    setTimeout(gameOn, 1000)
+  }
+}
+
+function game() {
   const currentBoardState = getBoardState()
 
   for (let i_index = 0; i_index <= gameState.rows - 1; i_index++) {
@@ -136,4 +139,8 @@ function checkLiveNeighbors(row, column) {
   return selectedCells.filter(cell => {
     return cell === true
   }).length
+}
+
+function pauseGame() {
+  gameState.running = false
 }

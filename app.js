@@ -120,14 +120,11 @@ function checkLiveNeighbors(row, column) {
   const selectedCells = []
 
   surroundingCells.forEach(place => {
-    const neighborRow = row + place[0]
-    const neighborColumn = column + place[1]
+    const rowIndex = row + place[0]
+    const columnIndex = column + place[1]
+    const neighborRow = findRow(rowIndex)
+    const neighborColumn = findColumn(columnIndex)
 
-    // If any surrounding cells would be outside the board boundary, then they are considered dead
-    if (neighborRow < 1 || neighborRow > rows || neighborColumn < 1 || neighborColumn > columns) {
-      selectedCells.push(false)
-      return
-    }
 
     if ( $('#' + neighborRow + neighborColumn).hasClass('selected') ) {
       selectedCells.push(true)
@@ -139,6 +136,26 @@ function checkLiveNeighbors(row, column) {
   return selectedCells.filter(cell => {
     return cell === true
   }).length
+}
+
+function findRow(rowIndex) {
+  if (rowIndex < 1) {
+    return gameState.rows
+  } else if (rowIndex > gameState.rows) {
+    return 1
+  } else {
+    return rowIndex
+  }
+}
+
+function findColumn(columnIndex) {
+  if (columnIndex < 1) {
+    return gameState.columns
+  } else if (columnIndex > gameState.columns) {
+    return 1
+  } else {
+    return columnIndex
+  }
 }
 
 function pauseGame() {

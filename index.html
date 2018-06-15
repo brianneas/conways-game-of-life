@@ -8,9 +8,11 @@
     <title></title>
   </head>
   <body>
-    Rows: <input name="rows" type="number" id="rows" value="10">
-    Columns: <input name="columns" type="number" id="columns" value="10">
-    <button onclick="createTable()">Create Table</button>
+    <div class="tableSetup">
+      Rows: <input name="rows" type="number" id="rows" value="10">
+      Columns: <input name="columns" type="number" id="columns" value="10">
+      <button onclick="createTable()">Create Table</button>
+    </div>
     <table class="table center"></table>
     <div>
       <button class="gameButton" onclick="runGame()">Start Conway's Game of Life</button>

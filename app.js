@@ -11,6 +11,7 @@ function createTable() {
 
   buildTable(table, gameState.rows, gameState.columns)
 
+  $('.tableSetup').hide()
   $('.gameButton').show()
 }
 

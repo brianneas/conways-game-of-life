@@ -1,7 +1,8 @@
 const gameState = {
   rows : null,
   columns : null,
-  running : false
+  running : false,
+  speed: 1000 // in ms
 }
 
 function createTable() {
@@ -50,7 +51,7 @@ function runGame() {
 function gameOn() {
   if (gameState.running) {
     game()
-    setTimeout(gameOn, 1000)
+    setTimeout(gameOn, gameState.speed)
   }
 }
 
@@ -179,4 +180,8 @@ function randomizeBoard() {
       }
     }
   }
+}
+
+function changeSpeed() {
+  gameState.speed = parseInt($('#gameSpeed').val())
 }

@@ -41,6 +41,15 @@ function buildTable(table, rows, columns) {
 
     table.append(row)
   }
+
+  setCellSize(columns)
+}
+
+function setCellSize(columns) {
+  const cellSize = 500 / columns
+
+  $('td').css("width", cellSize)
+  $('td').css("height", cellSize)
 }
 
 function runGame() {
